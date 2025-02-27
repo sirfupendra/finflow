@@ -1,0 +1,25 @@
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route,Link } from "react-router-dom";
+import Shopsite from './pages/shopsite/shopsite';
+import Finflowform from './pages/finflowform/Finflowform';
+import Home from './pages/Home/Home';
+
+function App() {
+  return (
+   
+    <div>
+       <Router>
+      <Routes>
+      <Route path="/" element={<Home />} />
+        <Route path="/shopsite" element={<Shopsite />} />
+        <Route path="/finflowform" element={<Finflowform />} />
+      </Routes>
+    </Router>
+      
+
+
+    </div>
+  )
+}
+
+export default App
