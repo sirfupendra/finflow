@@ -27,7 +27,7 @@ const ProductCards = () => {
             className="bg-blue-600 text-white px-5 py-2 mt-4 rounded-lg hover:bg-blue-700 transition-colors duration-300"
             onClick={() => handleBuyNow(product.price)}
           >
-            Buy Now
+            Buy Now!!!
           </button>
         </div>
       ))}
