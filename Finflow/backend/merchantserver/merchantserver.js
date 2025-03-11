@@ -3,12 +3,7 @@ const app=express();
 
 const mongoose=require('mongoose');
  main = async () => {
-    await mongoose.connect('mongodb://localhost:27017/merchantdatabase', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false
-    });
+    await mongoose.connect('mongodb://localhost:27017/merchantdatabase');
     console.log('Database Connected');
 }
 main().catch(err => console.log(err));
