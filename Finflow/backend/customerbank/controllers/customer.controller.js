@@ -12,3 +12,14 @@ exports.register = async (req, res) => {
         res.status(400).json(err.message);
     }
 }
+
+exports.customer_data = (req, res) => {
+    try {
+        const { Name, AccountNumber, CardNumber, ExpiryDate, Cvv, Amount } = req.body;
+        console.table({ Name, AccountNumber, CardNumber }); // Debugging statement
+        res.json({ message: "Data received successfully", receivedData: req.body });
+    } catch (err) {
+        console.error('Error:', err); // Debugging statement
+        res.status(400).json(err.message);
+    }
+}
