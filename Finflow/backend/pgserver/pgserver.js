@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
 
 // Define the schema and model for encrypted data
@@ -18,6 +19,7 @@ main().catch(err => console.log(err));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('hello from payment gateway server');

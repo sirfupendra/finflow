@@ -1,5 +1,6 @@
 const express=require('express');
 const app=express();
+const cors=require('cors');
 const customerroutes=require('./routes/customer.routes');
 
 const mongoose=require('mongoose');
@@ -11,6 +12,7 @@ main().catch(err => console.log(err));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(cors());
 
 app.get('/',(req,res)=>{
     res.send('hello from customer bank server');

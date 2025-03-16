@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route,Link } from "react-router-dom";
 import Shopsite from './pages/shopsite/shopsite';
 import Finflowform from './pages/finflowform/Finflowform';
 import Home from './pages/Home/Home';
+import Register from './pages/Register/Register';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/" element={<Home />} />
         <Route path="/shopsite" element={<Shopsite />} />
         <Route path="/finflowform" element={<Finflowform />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
       
