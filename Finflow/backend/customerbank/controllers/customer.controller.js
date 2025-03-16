@@ -8,7 +8,7 @@ exports.register = async (req, res) => {
         console.log('Customer:', customer); // Debugging statement
         res.status(200).json(customer.Name + ' has been registered successfully');
     } catch (err) {
-        console.error('Error:', err); // Debugging statement
+        console.error('Error:', err); // Debugging statementr
         res.status(400).json(err.message);
     }
 }
@@ -18,7 +18,7 @@ exports.customer_data = (req, res) => {
         const { Name, AccountNumber, CardNumber, ExpiryDate, Cvv, Amount } = req.body;
         console.table({ Name, AccountNumber, CardNumber ,ExpiryDate,Cvv,Amount}); // Debugging statement
         const validcustomer = customerservice.validatecustomer(Name, AccountNumber, CardNumber, ExpiryDate, Cvv);
-        if(validcustomer){
+        if(validcustomer == true){
             
             customerservice.updatecustomer(Name, AccountNumber, CardNumber, ExpiryDate, Cvv, Amount);
             res.json({ 
