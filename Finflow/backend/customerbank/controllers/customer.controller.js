@@ -16,8 +16,22 @@ exports.register = async (req, res) => {
 exports.customer_data = (req, res) => {
     try {
         const { Name, AccountNumber, CardNumber, ExpiryDate, Cvv, Amount } = req.body;
-        console.table({ Name, AccountNumber, CardNumber }); // Debugging statement
-        res.json({ message: "Data received successfully", receivedData: req.body });
+        console.table({ Name, AccountNumber, CardNumber ,ExpiryDate,Cvv,Amount}); // Debugging statement
+        const validcustomer = customerservice.validatecustomer(Name, AccountNumber, CardNumber, ExpiryDate, Cvv);
+        if(validcustomer){
+            
+            customerservice.updatecustomer(Name, AccountNumber, CardNumber, ExpiryDate, Cvv, Amount);
+            res.json({ 
+                "message": "payment successful", 
+                "customer": Name, 
+                "Amountleft": Amount 
+            });
+            
+        }
+        else{
+            res.json({ message: "Data received successfully at customerbank but invalid", receivedData: req.body });
+        }
+       
     } catch (err) {
         console.error('Error:', err); // Debugging statement
         res.status(400).json(err.message);

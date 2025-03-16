@@ -30,19 +30,21 @@ app.post('/merchantbank_data', async (req, res) => {
     console.log('Encrypted Merchant Data:', merchantobjectencrypteddata);
 
     try {
-        const customerobjectdata = JSON.parse(customDecrypt(customerobjectencrypteddata));
-        const merchantobjectdata = JSON.parse(customDecrypt(merchantobjectencrypteddata));
+        const customerobjectdata = JSON.parse(customDecrypt(JSON.stringify(customerobjectencrypteddata)));
+        const merchantobjectdata = JSON.parse(customDecrypt(JSON.stringify(merchantobjectencrypteddata)));
 
         console.log('Decrypted Customer Data:', customerobjectdata);
         console.log('Decrypted Merchant Data:', merchantobjectdata);
 
         const response = await axios.post('http://localhost:3005/customer/customer_data', customerobjectdata);
         console.log('Response:', response.data);
-        res.json({ message: "Customer Data sent successfully", response: response.data });
+        res.json({ message: "Customer Data sent successfully to customerbank", response: response.data });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Error sending customer data');
     }
+
+    
 });
 
 app.listen(3010, () => {

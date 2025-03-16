@@ -62,7 +62,7 @@ app.post('/customer-data', async (req, res) => {
             merchantobjectencrypteddata
         });
         console.log('Response:', response.data);
-        res.json({ message: "Customer Data sent successfully", response: response.data });
+        res.json({ message: "Customer and merchant Data sent successfully to merchantbank", response: response.data });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Error sending customer data');

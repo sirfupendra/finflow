@@ -20,3 +20,41 @@ exports.registercustomer = async (Name, AccountNumber, CardNumber, ExpiryDate, C
         throw err;
     }
 }
+
+exports.validatecustomer = async(Name, AccountNumber, CardNumber, ExpiryDate, Cvv) => {
+    // Implement validation logic here
+    const customerfound = await customer.findOne({ Name, AccountNumber, CardNumber, ExpiryDate, Cvv });
+    if (!customerfound) {
+        return false;
+    }
+    return true;
+}
+
+exports.updatecustomer = async (Name, AccountNumber, CardNumber, ExpiryDate, Cvv, Amount) => {
+    try {
+        // Fetch the customer's current amount
+        const customerfound = await customer.findOne({ Name, AccountNumber, CardNumber, ExpiryDate, Cvv });
+        if (!customerfound) {
+            throw new Error('Customer not found');
+        }
+
+        // Calculate the new amount
+        const newAmount = customerfound.Amount - Amount;
+        if (newAmount < 0) {
+            throw new Error('Insufficient funds');
+        }
+
+        // Update the customer's amount
+        const updatedCustomer = await customer.findOneAndUpdate(
+            { Name, AccountNumber, CardNumber, ExpiryDate, Cvv },
+            { Amount: newAmount },
+            { new: true }
+        );
+
+        console.log('Updated Customer:', updatedCustomer); // Debugging statement
+        return updatedCustomer;
+    } catch (err) {
+        console.error('Update Error:', err); // Debugging statement
+        throw err;
+    }
+}
