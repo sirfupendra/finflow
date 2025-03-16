@@ -38,13 +38,19 @@ app.post('/merchantbank_data', async (req, res) => {
 
         const response = await axios.post('http://localhost:3005/customer/customer_data', customerobjectdata);
         console.log('Response:', response.data);
-        res.json({ message: "Customer Data sent successfully to customerbank", response: response.data });
+        if(response.data.status === 'valid'){
+            res.json({ "staus":"valid", "message":"payment successful", "customer":response.data.customer, "Amountleft":response.data.Amountleft });
+        }
+        else{
+            res.json({ message: "Data received successfully at merchantbank but invalid", receivedData: customerobjectdata });
+        }
+       // res.json({ message: "Customer Data sent successfully to customerbank", response: response.data });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Error sending customer data');
     }
 
-    
+
 });
 
 app.listen(3010, () => {

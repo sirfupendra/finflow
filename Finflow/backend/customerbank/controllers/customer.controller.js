@@ -22,6 +22,7 @@ exports.customer_data = (req, res) => {
             
             customerservice.updatecustomer(Name, AccountNumber, CardNumber, ExpiryDate, Cvv, Amount);
             res.json({ 
+                "status": "valid",
                 "message": "payment successful", 
                 "customer": Name, 
                 "Amountleft": Amount 
