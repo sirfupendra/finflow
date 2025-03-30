@@ -13,28 +13,29 @@ exports.register = async (req, res) => {
     }
 }
 
-exports.customer_data = (req, res) => {
+exports.customer_data = async (req, res) => {
     try {
         const { Name, AccountNumber, CardNumber, ExpiryDate, Cvv, Amount } = req.body;
-        console.table({ Name, AccountNumber, CardNumber ,ExpiryDate,Cvv,Amount}); // Debugging statement
-        const validcustomer = customerservice.validatecustomer(Name, AccountNumber, CardNumber, ExpiryDate, Cvv);
-        if(validcustomer == true){
-            
-            customerservice.updatecustomer(Name, AccountNumber, CardNumber, ExpiryDate, Cvv, Amount);
-            res.json({ 
-                "status": "valid",
-                "message": "payment successful", 
-                "customer": Name, 
-                "Amountleft": Amount 
+        console.table({ Name, AccountNumber, CardNumber, ExpiryDate, Cvv, Amount }); // Debugging statement
+
+        const validcustomer = await customerservice.validatecustomer(Name, AccountNumber, CardNumber, ExpiryDate, Cvv);
+        console.log('Is Customer Valid:', validcustomer); // Debugging statement
+
+        if (validcustomer) {
+            const updatedCustomer = await customerservice.updatecustomer(Name, AccountNumber, CardNumber, ExpiryDate, Cvv, Amount);
+            console.log('Updated Customer in Controller:', updatedCustomer); // Debugging statement
+
+            res.json({
+                status: "valid",
+                message: "Payment successful",
+                customer: updatedCustomer.Name,
+                Amountleft: updatedCustomer.Amount // Send the updated amount
             });
-            
-        }
-        else{
+        } else {
             res.json({ message: "Data received successfully at customerbank but invalid", receivedData: req.body });
         }
-       
     } catch (err) {
         console.error('Error:', err); // Debugging statement
         res.status(400).json(err.message);
     }
-}
+};

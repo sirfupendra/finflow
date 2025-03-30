@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import axios from 'axios';
+import axios from "axios";
 
 const Finflowform = () => {
   const location = useLocation();
@@ -32,107 +32,126 @@ const Finflowform = () => {
       merchantobjectdata: {
         Name: "Rahul Sharma",
         AccountNumber: "123456789012",
-        Balance: 15000
-      }
+        Balance: 15000,
+      },
     };
 
     try {
-      const response = await axios.post('http://localhost:3020/customer-data', dataToSend);
-      console.log('Form Data Submitted:', response.data);
+      const response = await axios.post(
+        "http://localhost:3020/customer-data",
+        dataToSend
+      );
+      console.log("Form Data Submitted:", response.data);
       // Handle success response
     } catch (error) {
-      console.error('Error submitting form data:', error);
+      console.error("Error submitting form data:", error);
       // Handle error response
     }
   };
 
   return (
-    <motion.div 
+    <motion.div
       className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-500 to-blue-600 text-white"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <motion.div 
-        className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-md"
+      <motion.div
+        className="w-full max-w-2xl mx-auto p-8 bg-white rounded-lg shadow-lg"
         initial={{ scale: 0.8 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Payment Page</h2>
+        <h2 className="text-4xl font-bold mb-6 text-center text-gray-800">
+          Payment Form
+        </h2>
+        <p className="text-center text-gray-600 mb-8">
+          Please fill in your details to proceed with the payment.
+        </p>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700">Name</label>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-medium mb-2">Name</label>
             <input
               type="text"
               name="Name"
               value={formData.Name}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
+              placeholder="Enter your full name"
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Account Number</label>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-medium mb-2">
+              Account Number
+            </label>
             <input
               type="number"
               name="AccountNumber"
               value={formData.AccountNumber}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
+              placeholder="Enter your account number"
               required
               minLength="12"
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Card Number</label>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-medium mb-2">
+              Card Number
+            </label>
             <input
               type="number"
               name="CardNumber"
               value={formData.CardNumber}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
+              placeholder="Enter your card number"
               required
               minLength="12"
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Expiry Date</label>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-medium mb-2">
+              Expiry Date
+            </label>
             <input
               type="text"
               name="ExpiryDate"
               value={formData.ExpiryDate}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
+              placeholder="MM/YY"
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">CVV</label>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-medium mb-2">CVV</label>
             <input
               type="number"
               name="Cvv"
               value={formData.Cvv}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-lg"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
+              placeholder="Enter CVV"
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Amount</label>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-medium mb-2">Amount</label>
             <input
               type="number"
               name="Amount"
               value={formData.Amount}
               readOnly
-              className="w-full px-3 py-2 border rounded-lg bg-gray-100"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-800"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+            className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300"
           >
-            Submit
+            Submit Payment
           </button>
         </form>
       </motion.div>

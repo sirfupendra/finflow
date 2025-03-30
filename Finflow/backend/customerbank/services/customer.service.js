@@ -24,6 +24,7 @@ exports.registercustomer = async (Name, AccountNumber, CardNumber, ExpiryDate, C
 exports.validatecustomer = async(Name, AccountNumber, CardNumber, ExpiryDate, Cvv) => {
     // Implement validation logic here
     const customerfound = await customer.findOne({ Name, AccountNumber, CardNumber, ExpiryDate, Cvv });
+    console.log('Customer Found:', customerfound); // Debugging statement
     if (!customerfound) {
         return false;
     }
@@ -44,12 +45,16 @@ exports.updatecustomer = async (Name, AccountNumber, CardNumber, ExpiryDate, Cvv
             throw new Error('Insufficient funds');
         }
 
-        // Update the customer's amount
+        // Update the customer's amount in the database
         const updatedCustomer = await customer.findOneAndUpdate(
             { Name, AccountNumber, CardNumber, ExpiryDate, Cvv },
-            { Amount: newAmount },
-            { new: true }
+            { $set: { Amount: newAmount } },
+            { new: true } // Return the updated document
         );
+
+        if (!updatedCustomer) {
+            throw new Error('Failed to update customer');
+        }
 
         console.log('Updated Customer:', updatedCustomer); // Debugging statement
         return updatedCustomer;
@@ -57,4 +62,4 @@ exports.updatecustomer = async (Name, AccountNumber, CardNumber, ExpiryDate, Cvv
         console.error('Update Error:', err); // Debugging statement
         throw err;
     }
-}
+};
