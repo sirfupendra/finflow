@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Finflowform = () => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const price = queryParams.get("price");
-
+  const navigate = useNavigate(); // Hook to navigate to another page
+  const location = useLocation(); // Hook to access the current location
+  const queryParams = new URLSearchParams(location.search); // Get query parameters from the URL
+  const price = queryParams.get("price"); // Extract the price from the query parameters
   const [formData, setFormData] = useState({
     Name: "",
     AccountNumber: "",
     CardNumber: "",
     ExpiryDate: "",
     Cvv: "",
-    Amount: price || 0,
+    Amount:price|| 0,
   });
+
+  const [error, setError] = useState(null); // State to store error messages
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,15 +40,29 @@ const Finflowform = () => {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:3020/customer-data",
-        dataToSend
-      );
+      const response = await axios.post("http://localhost:3020/customer-data", dataToSend);
       console.log("Form Data Submitted:", response.data);
-      // Handle success response
+      console.log("Response Data:", response.data.response.staus);
+      if (response.data.response.staus === "valid") {
+        // Redirect to PaymentSuccess page with response data
+        navigate("/payment-success", { state: response.data.response });
+      } else {
+        // Handle failure response
+        setError(response.data.response.message || "Payment failed. Please try again.");
+      }
+
+      // Clear the form
+      setFormData({
+        Name: "",
+        AccountNumber: "",
+        CardNumber: "",
+        ExpiryDate: "",
+        Cvv: "",
+        Amount: 0,
+      });
     } catch (error) {
       console.error("Error submitting form data:", error);
-      // Handle error response
+      setError("An error occurred while processing your payment. Please try again.");
     }
   };
 
@@ -154,6 +171,13 @@ const Finflowform = () => {
             Submit Payment
           </button>
         </form>
+
+        {error && (
+          <div className="mt-6 p-4 bg-red-100 border border-red-400 rounded-lg">
+            <h3 className="text-lg font-bold text-red-800">Error</h3>
+            <p className="text-gray-700 mt-2">{error}</p>
+          </div>
+        )}
       </motion.div>
     </motion.div>
   );
