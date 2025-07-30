@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Button from '../../Components/Button'; // Importing the Button component
 
 function Home() {
   return (
@@ -36,7 +37,16 @@ function Home() {
           <button className="bg-white text-blue-600 px-6 py-3 rounded-lg shadow-lg hover:bg-gray-200 transition duration-300">
             Go to Shop Site
           </button>
+
         </Link>
+        <Link to="/login">
+          <button className="bg-white text-blue-600 px-6 py-3 rounded-lg shadow-lg hover:bg-gray-200 transition duration-300">
+            Login to Your Account
+          </button>
+         
+        </Link>
+
+
       </motion.div>
     </div>
   );

@@ -1,4 +1,5 @@
 const customerservice = require('../services/customer.service');
+const customer=require('../models/customer.model');
 
 exports.register = async (req, res) => {
     try {
@@ -39,3 +40,18 @@ exports.customer_data = async (req, res) => {
         res.status(400).json(err.message);
     }
 };
+
+exports.login= async(req,res)=>{
+    try{
+        const{account,cvv}=req.body;
+        const Customer=await customer.findOne({AccountNumber:account,Cvv:cvv});
+        if(!customer){
+            throw new Error('Invalid account or cvv');
+        }
+        res.json({message:'Logged in successfully',Customer:Customer});
+    }
+    catch(err){
+        console.error('Error:',err);
+        res.status(400).json(err.message);
+    }
+}
