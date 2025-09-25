@@ -7,13 +7,13 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
   line-height: 1.6;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, #f3f4f6 0%, #e0e7ff 100%);
   min-height: 100vh;
 }
 
 .account-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, #f3f4f6 0%, #e0e7ff 100%);
   padding: 2rem;
   display: flex;
   align-items: center;
@@ -21,15 +21,20 @@ body {
 }
 
 .account-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  border-radius: 00px;
+  box-shadow: 0 8px 32px rgba(60, 72, 88, 0.18);
+  border: 1px solid #e0e7ff;
   padding: 2.5rem;
-  max-width: 600px;
+  max-width: 420px;
   width: 100%;
-  animation: slideUp 0.4s ease-out;
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 0.2s;
+}
+
+.account-card:hover {
+  box-shadow: 0 16px 48px rgba(60, 72, 88, 0.22);
 }
 
 @keyframes slideUp {
@@ -44,13 +49,14 @@ body {
 }
 
 .account-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #0f172a;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1e293b;
   text-align: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid #e2e8f0;
+  border-bottom: 2px solid #e0e7ff;
+  letter-spacing: 1px;
 }
 
 .account-info {
@@ -59,15 +65,16 @@ body {
   align-items: center;
   padding: 1rem 0;
   border-bottom: 1px solid #f1f5f9;
-  transition: all 0.2s ease;
+  transition: background 0.2s, box-shadow 0.2s, margin 0.2s, padding 0.2s;
+  position: relative;
 }
 
 .account-info:hover {
-  background: #f8fafc;
+  background: #f1f5f9;
   margin: 0 -1rem;
   padding: 1rem;
-  border-radius: 8px;
-  border-bottom: 1px solid #f1f5f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(60, 72, 88, 0.06);
 }
 
 .account-info:last-child {
@@ -76,26 +83,34 @@ body {
 
 .info-label {
   font-weight: 600;
-  color: #374151;
-  font-size: 1rem;
+  color: #334155;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .info-value {
   font-weight: 500;
-  color: #111827;
-  font-size: 1rem;
+  color: #1e293b;
+  font-size: 1.05rem;
+  word-break: break-word;
 }
 
 .amount-value {
   font-weight: 700;
   color: #059669;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  letter-spacing: 1px;
 }
 
 .card-number-value {
   font-family: "Courier New", monospace;
   letter-spacing: 2px;
-  color: #111827;
+  color: #1e293b;
+  background: #f3f4f6;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
 }
 
 .cvv-value {
@@ -103,6 +118,9 @@ body {
   letter-spacing: 3px;
   color: #dc2626;
   font-weight: 600;
+  background: #fef2f2;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
 }
 
 .loading-text {
@@ -111,8 +129,31 @@ body {
   justify-content: center;
   min-height: 100vh;
   font-size: 1.2rem;
-  color: #6b7280;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  color: #64748b;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e0e7ff 100%);
+}
+
+.account-info button {
+  font-size: 0.95rem;
+  color: #2563eb;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  margin-left: 0.5rem;
+}
+
+.account-info button:hover {
+  color: #1d4ed8;
+  background: #e0e7ff;
+}
+
+.icon {
+  font-size: 1.2rem;
+  margin-right: 0.3rem;
+  vertical-align: middle;
 }
 
 /* Responsive Design */
@@ -123,6 +164,7 @@ body {
 
   .account-card {
     padding: 1.5rem;
+    max-width: 98vw;
   }
 
   .account-title {
@@ -133,10 +175,11 @@ body {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+    padding: 0.75rem 0;
   }
 
   .info-value {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
   }
 
   .amount-value {

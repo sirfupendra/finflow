@@ -9,13 +9,15 @@ const customerschema=new mongoose.Schema({
         type:Number,
         required:true,
         unique:true,
-        minilength:12
+        minilength:16,
+        maxLength:16
     },
     CardNumber:{
         type:Number,
         required:true,
         unique:true,
-        minilength:12
+        minilength:16,
+        maxLength:16
     },
     ExpiryDate:{
         type:String,
