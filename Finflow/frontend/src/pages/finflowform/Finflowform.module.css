@@ -1,0 +1,108 @@
+.formContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.formCard {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem 2rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(60, 60, 120, 0.18);
+  animation: popIn 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.formTitle {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #22223b;
+  text-align: center;
+}
+
+.formSubtitle {
+  color: #4a4e69;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.formGroup {
+  margin-bottom: 1.2rem;
+}
+
+.formLabel {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: #22223b;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #c9ada7;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #22223b;
+  background: #f8f8fa;
+  transition: border-color 0.2s;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: #38f9d7;
+  background: #fff;
+}
+
+.formInput[readonly] {
+  background: #e9ecef;
+  color: #888;
+}
+
+.submitBtn {
+  width: 100%;
+  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+  color: #fff;
+  padding: 0.9rem 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.submitBtn:hover {
+  background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.errorBox {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #ffe5e5;
+  border: 1.5px solid #ff6b6b;
+  border-radius: 8px;
+}
+
+.errorTitle {
+  color: #b00020;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.errorMsg {
+  color: #b00020;
+  font-size: 1rem;
+}
